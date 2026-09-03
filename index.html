@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Churrasco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1c1815;--bg-panel:#241f1b;--bg-panel-2:#2c2621;--line:#3a332c;--ember:#c1440e;--flame:#e8a33d;--teal:#4a7c74;--olive:#7a8b4c;--smoke:#f2ece1;--smoke-dim:#b0a596;--smoke-faint:#7d7368}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:radial-gradient(ellipse 800px 500px at 15% -5%,rgba(193,68,14,.14),transparent 60%),radial-gradient(ellipse 600px 400px at 100% 10%,rgba(232,163,61,.08),transparent 60%);color:var(--smoke);font-family:Inter,-apple-system,sans-serif;min-height:100vh}.wrap{max-width:880px;margin:0 auto;padding:40px 20px 80px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:32px;flex-wrap:wrap}.brand{font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.14em;color:var(--ember);margin:0 0 6px}
+#eventTitle{font-family:"Bebas Neue",sans-serif;font-size:clamp(38px,7vw,58px);line-height:.95;color:var(--smoke);background:transparent;border:none;outline:none;width:100%;padding:0;letter-spacing:.01em}#eventTitle::placeholder{color:var(--smoke-faint)}
+.meta-row{display:flex;gap:14px;align-items:center;margin-top:10px}#eventDate{background:transparent;border:none;outline:none;color:var(--smoke-dim);font-size:15px;font-family:Inter,sans-serif;border-bottom:1px dashed var(--line);padding:2px 0}#eventDate::-webkit-calendar-picker-indicator{filter:invert(.7);cursor:pointer}
+.counter{text-align:right;white-space:nowrap}.counter .num{font-family:"Bebas Neue",sans-serif;font-size:44px;color:var(--flame);line-height:1;display:block}.counter .lbl{font-size:12px;color:var(--smoke-dim);letter-spacing:.04em}
+.grid{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start}@media(max-width:680px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--bg-panel);border:1px solid var(--line);border-radius:6px;padding:20px}.panel h2{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:.04em;margin:0 0 16px;color:var(--smoke)}
+label{display:block;font-size:12px;color:var(--smoke-dim);margin:14px 0 6px}label:first-of-type{margin-top:0}
+input[type=text],input[type=number],select{width:100%;background:var(--bg-panel-2);border:1px solid var(--line);color:var(--smoke);font-family:Inter,sans-serif;font-size:14px;padding:10px 11px;border-radius:4px;outline:none}input[type=text]:focus,input[type=number]:focus,select:focus{border-color:var(--ember)}input::placeholder{color:var(--smoke-faint)}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b0a596'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+button.submit{width:100%;margin-top:18px;background:var(--ember);color:var(--smoke);border:none;padding:12px;border-radius:4px;font-family:Inter,sans-serif;font-weight:600;font-size:14px;cursor:pointer}.form-msg{font-size:12px;color:var(--olive);margin-top:10px;min-height:14px}
+.categories{display:flex;flex-direction:column;gap:18px}.cat-block{background:var(--bg-panel);border:1px solid var(--line);border-left:3px solid var(--cat-color,var(--ember));border-radius:6px;overflow:hidden}.cat-head{display:flex;justify-content:space-between;align-items:baseline;padding:14px 18px;border-bottom:1px solid var(--line)}.cat-head h3{margin:0;font-family:"Bebas Neue",sans-serif;font-size:19px;letter-spacing:.03em;color:var(--cat-color,var(--ember))}.cat-head span{font-size:12px;color:var(--smoke-dim)}
+.item-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--line);gap:10px}.item-row:last-child{border-bottom:none}.item-main{display:flex;flex-direction:column;gap:2px;min-width:0}.item-name{font-size:14.5px;color:var(--smoke)}.item-name b{font-weight:600}.item-who{font-size:12px;color:var(--smoke-dim)}.del-btn{background:transparent;border:1px solid var(--line);color:var(--smoke-faint);width:26px;height:26px;border-radius:4px;cursor:pointer;font-size:14px;line-height:1;flex-shrink:0}.del-btn:hover{border-color:var(--ember);color:var(--ember)}
+.empty{padding:24px 18px;text-align:center;color:var(--smoke-faint);font-size:13.5px}.empty-all{text-align:center;padding:60px 20px;color:var(--smoke-dim)}.empty-all .big{font-family:"Bebas Neue",sans-serif;font-size:26px;color:var(--smoke);margin-bottom:6px}.sync-note{text-align:center;font-size:11.5px;color:var(--smoke-faint);margin-top:28px;line-height:1.6}.status{text-align:center;font-size:11px;margin-top:8px;color:var(--smoke-faint)}.status.ok{color:var(--olive)}.status.err{color:var(--ember)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div style="flex:1;min-width:220px"><p class="brand">CHURRASCO &nbsp;·&nbsp; LISTA DE ITENS</p><input id="eventTitle" placeholder="Nome do churrasco" maxlength="60"><div class="meta-row"><input type="date" id="eventDate"></div></div>
+<div class="counter"><span class="num" id="itemCount">0</span><span class="lbl">itens confirmados</span></div>
+</header>
+<div class="grid">
+<div class="panel"><h2>Vou levar</h2><form id="itemForm">
+<label for="guestName">Seu nome</label><input type="text" id="guestName" placeholder="Ex: João" required maxlength="30">
+<label for="itemName">O que vai levar</label><input type="text" id="itemName" placeholder="Ex: Picanha" required maxlength="40">
+<div class="row2"><div><label for="itemQty">Quantidade</label><input type="number" id="itemQty" placeholder="2" min="0" step="0.1" required></div>
+<div><label for="itemUnit">Unidade</label><select id="itemUnit"><option value="kg">kg</option><option value="un">unidade(s)</option><option value="L">litro(s)</option><option value="pacote">pacote(s)</option><option value="caixa">caixa(s)</option><option value="outro">outro</option></select></div></div>
+<label for="itemCat">Categoria</label><select id="itemCat"><option value="carnes">Carnes</option><option value="bebidas">Bebidas</option><option value="acompanhamentos">Acompanhamentos</option><option value="outros">Outros (carvão, gelo, descartáveis...)</option></select>
+<button type="submit" class="submit">Adicionar à lista</button><div class="form-msg" id="formMsg"></div><div class="status" id="status">Conectando...</div>
+</form></div>
+<div class="categories" id="categories"></div>
+</div>
+<p class="sync-note">Essa lista é compartilhada — todo mundo que abrir este link vê e edita os mesmos itens.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/*
+  CONFIGURAÇÃO:
+  1) Crie um projeto gratuito no Supabase.
+  2) Execute o arquivo supabase.sql deste pacote.
+  3) Cole aqui a Project URL e a Publishable key do seu projeto.
+*/
+const SUPABASE_URL = "https://whtfnkvrfdctkyfnwgeu.supabase.co/rest/v1/";
+const SUPABASE_KEY = "Csb_publishable_KDdLf9itR0mNWdnLB7etzg_zsl-oP8s";
+
+const CATS={carnes:{label:"Carnes",color:"var(--ember)"},bebidas:{label:"Bebidas",color:"var(--teal)"},acompanhamentos:{label:"Acompanhamentos",color:"var(--olive)"},outros:{label:"Outros",color:"var(--flame)"}};
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let items=[]; let saveTimer=null;
+
+const catsEl=document.getElementById("categories"),countEl=document.getElementById("itemCount"),titleEl=document.getElementById("eventTitle"),dateEl=document.getElementById("eventDate"),formMsg=document.getElementById("formMsg"),statusEl=document.getElementById("status");
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function setStatus(text,kind=""){statusEl.textContent=text;statusEl.className="status "+kind}
+function escapeHtml(str){return String(str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+async function loadState(){
+  const {data,error}=await client.from("churrasco_state").select("id,title,event_date,items").eq("id",1).maybeSingle();
+  if(error){setStatus("Erro de conexão. Confira a configuração.","err");console.error(error);return}
+  if(data){titleEl.value=data.title||"";dateEl.value=data.event_date||"";items=Array.isArray(data.items)?data.items:[]}
+  render();setStatus("Online e compartilhado","ok");
+}
+
+function render(){
+  countEl.textContent=items.length;catsEl.innerHTML="";
+  if(!items.length){catsEl.innerHTML='<div class="panel empty-all"><div class="big">Ninguém colocou nada ainda</div><div>Seja o primeiro a garantir a carne (ou o carvão).</div></div>';return}
+  Object.keys(CATS).forEach(catKey=>{
+    const catItems=items.filter(i=>i.cat===catKey),cfg=CATS[catKey],block=document.createElement("div");
+    block.className="cat-block";block.style.setProperty("--cat-color",cfg.color);
+    const head=document.createElement("div");head.className="cat-head";head.innerHTML=`<h3>${cfg.label}</h3><span>${catItems.length} ${catItems.length===1?"item":"itens"}</span>`;block.appendChild(head);
+    if(!catItems.length){const empty=document.createElement("div");empty.className="empty";empty.textContent="Nada por aqui ainda";block.appendChild(empty)}
+    else catItems.forEach(item=>{const row=document.createElement("div");row.className="item-row";row.innerHTML=`<div class="item-main"><div class="item-name"><b>${escapeHtml(item.qty)} ${escapeHtml(item.unit)}</b> — ${escapeHtml(item.name)}</div><div class="item-who">${escapeHtml(item.guest)}</div></div><button class="del-btn" title="Remover" data-id="${escapeHtml(item.id)}">×</button>`;block.appendChild(row)});
+    catsEl.appendChild(block);
+  });
+  document.querySelectorAll(".del-btn").forEach(btn=>btn.addEventListener("click",async()=>{items=items.filter(i=>i.id!==btn.dataset.id);render();await saveState()}));
+}
+
+async function saveState(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(async()=>{
+    setStatus("Salvando...","");
+    const {error}=await client.from("churrasco_state").upsert({id:1,title:titleEl.value,event_date:dateEl.value,items,updated_at:new Date().toISOString()});
+    if(error){setStatus("Não foi possível salvar","err");console.error(error)}else setStatus("Salvo e compartilhado","ok");
+  },150);
+}
+
+titleEl.addEventListener("input",saveState);dateEl.addEventListener("change",saveState);
+
+document.getElementById("itemForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const guest=document.getElementById("guestName").value.trim(),name=document.getElementById("itemName").value.trim(),qty=document.getElementById("itemQty").value,unit=document.getElementById("itemUnit").value,cat=document.getElementById("itemCat").value;
+  if(!guest||!name||qty==="")return;
+  items.push({id:uid(),guest,name,qty,unit,cat});render();
+  document.getElementById("itemName").value="";document.getElementById("itemQty").value="";
+  formMsg.textContent="Adicionado à lista ✓";setTimeout(()=>formMsg.textContent="",2000);await saveState();
+});
+
+client.channel("churrasco-live").on("postgres_changes",{event:"*",schema:"public",table:"churrasco_state",filter:"id=eq.1"},payload=>{
+  const d=payload.new;if(!d)return;
+  titleEl.value=d.title||"";dateEl.value=d.event_date||"";items=Array.isArray(d.items)?d.items:[];render();setStatus("Atualizado para todos","ok");
+}).subscribe();
+
+if(SUPABASE_URL.startsWith("COLE_AQUI")) setStatus("Falta configurar o Supabase","err"); else loadState();
+</script>
+</body>
+</html>
